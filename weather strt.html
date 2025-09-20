@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<title>name change</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<link rel="styleSheet" href="task2.css">
+</head>
+<body>
+<input type="text" id="textArea" placeholder="Enter Your City"></input>
+<button id="btn" onClick="getData()"  >Click Here</button>
+
+<div class="box">
+
+<h1 class="district" id="district">Place</h1>
+<p class="temp" id="temp">Temprature</p>
+<p class="type" id="type">Report</p>
+
+<div class="box2">
+<div class="details">
+
+<h1 class="type1">Humidity</h1>
+<h1 class="type2">Wind(s/ms)</h1>
+<h1 class="type3">Pressure(N/m<sup>2</sup>)</h1>
+<h1 class="type4">Feels like</h1>
+</div>
+
+
+<div class="value">
+<h2 id="humidity">--</h2>
+<h2 id="wind">--</h2>
+<h2 id="pressure">--</h2>
+<h2 id="feels">--</h2>
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+let change=document.getElementById("view")
+let btn=document.getElementById("btn")
+let detail=document.getElementById("textArea").value.trim();
+let place=document.getElementById("District")
+let temprature=document.getElementById("temp")
+let season=document.getElementById("type")
+let humi=document.getElementById("humidity")
+let air=document.getElementById("wind")
+let den=document.getElementById("pressure")
+let like=document.getElementById("feels")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function getData(){
+
+let detail=document.getElementById("textArea").value.trim();
+let chennai=`${detail}`;
+const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "cyan", "lime", "brown"];
+const variant=Math.floor(Math.random()*11-1)
+const apiKey="f5904162aeeeec2d9be69f24af7d8296";
+const url=`https://api.openweathermap.org/data/2.5/weather?q=${chennai}&appid=${apiKey}&units=metric`;
+console.log(detail)
+try{
+const response=await fetch(url);
+const user=await response.json();
+
+
+console.log(user.main.humidity)
+console.log(user)
+district.textContent=user.name
+temp.textContent=user.main.temp+"`C"
+type.textContent=user.weather[0].description.toUpperCase()
+humidity.textContent=user.main.humidity
+wind.textContent=user.wind.speed
+pressure.textContent=user.main.pressure
+feels.textContent=user.main.feels_like
+btn.style.backgroundColor=colors[variant]
+}
+catch(err){
+console.log(err)
+alert("Sorry! Place Not Found")
+alert("Try Nearby Places")
+}
+
+}
+
+
+//
+</script>
+</body>
+
+</html>
+
+
+
+
+

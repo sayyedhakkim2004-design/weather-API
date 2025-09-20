@@ -1,0 +1,94 @@
+
+*{
+margin:0px;
+padding:0px;
+}
+
+body{
+background-image:url("weather.png");
+color:white;
+background-repeat:no-repeat;
+}
+
+.box{
+height:530px;
+width:1000px;
+border:2px solid black;
+margin:0 auto;
+margin-top:30px;
+border-radius:20px;
+backdrop-filter: blur(10px); 
+-webkit-backdrop-filter: blur(10px);  
+filter:drop-shadow(0px 0px 10px blue);
+box-shadow:2px 2px 2px red,
+-2px -2px red;
+}
+
+
+.district{
+margin-top:10px;
+text-align:center;
+font-size:50px;
+}
+
+.temp{
+margin-top:70px;
+text-align:center;
+font-size:70px;
+}
+
+.type{
+text-align:center;
+font-size:40px;
+}
+
+.box2{
+height:180px;
+width:800px;
+border:2px solid black;
+margin:0 auto;
+margin-top:30px;
+border-radius:20px;
+}
+.details{
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+}
+
+.details >h1{
+padding-top:30px;
+padding-bottom:30px;
+display:flex;
+flex-wrap:wrap;
+}
+
+.value{
+display:flex;
+justify-content:space-around;
+font-size:25px;
+flex-wrap:wrap;
+}
+#textArea{
+margin-left:450px;
+margin-top:30px;
+padding:7px;
+width:400px;
+height:20px;
+font-size:20px;
+border-radius:5px;
+border:none;
+background
+}
+#btn{
+width:auto;
+font-size:20px;
+border-radius:5px;
+padding:7px;
+border:none;
+}
+
+
+
+
+
