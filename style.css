@@ -20,7 +20,31 @@ margin-top:5%;
 padding-bottom:1.5%;
 box-shadow: rgba(0, 0, 0, 100) 0px 5px 15px;
 background-color:white;
+animation-name:bounce;
+animation-iteration-count:infinite;
+animation-duration:2s;
 }
+
+@keyframes bounce{
+
+0%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(5px);
+}
+100%{
+transform:translateY(0);
+}
+
+
+
+}
+
+
+
+
+
                                     /* SEARH BAR */
 
 .search-box{
@@ -121,6 +145,7 @@ flex-wrap:wrap;
 justify-content:space-around;
 align-items:center;
 }
+
                                       /* MEDIA QUERY */
 
 
