@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+<head>
+      <title>Weather App</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <link rel="icon"   type="image/x-icon"   href="icon.png">
+   <!--Link to CSS -->
+      <link rel="styleSheet" href="style.css">
+   <!--Link to Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+   <!-- Links to Font Awesomw -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+                                                  <!--MAIN CONTENT BOX -->
+
+<div class="container">
+
+                                                  <!--SEARCH BOX -->
+
+        <div class="search-box">
+             <i class="fa-solid fa-magnifying-glass"></i>
+             <input class="search-box__input" type="text" id="textArea" placeholder="Search Location">
+             <button id="btn" class="search-box__btn" onClick="getData()"  >Search </button>
+            
+        </div>
+
+                                                  <!--LOCATION AREA -->
+
+  <div class="box">
+
+        <div class="box-place">
+             <h1 id="box-place__location" >Place -</h1>
+             <p id="box-place__day">Day,</p>
+             <p id="box-place__month">Month,</p>
+             <p id="box-place__year">Year</p>
+        </div>
+ </div>
+  
+                                                  <!--MAIN CONTENT AREA -->
+
+<div class="box-two">
+
+                                                  <!--LEFT SIDE AREA -->
+       <div class="details-one">
+               <p class="details-one__temp" id="temp">Temprature</p>
+               <p class="details-one__report" id="type">Report</p>
+
+           <div class="details-extra">
+              <div class="details-one__type">            
+               <h3 class="type1">Humidity</h3>
+               <h4 id="humidity">--</h2>
+           </div>
+
+            <div class="details-two__type">
+                <h3 class="type2">Wind</h3>
+                <h4 id="wind">--</h2>
+            </div>
+       </div>
+   </div>  
+
+                                                  <!--IMAGE AREA-->
+
+
+
+      <div class="details-two">
+             <img  class="details-two__image" id="rain" src="rain.png">
+             <img class="details-two__image" id="sunny" src="sunny.png">
+             <img class="details-two__image" id="wind2" src="wind.png">
+             <img class="details-two__image" id="thunder" src="thunder.png">
+             <img class="details-two__image" id="snow" src="snow1.png">
+             <img class="details-two__image" id="cloudy" src="cloudy.png">
+      </div>
+
+
+                                                  <!--RIGHT SIDE EXTRA CONTENT-->
+
+
+
+      <div class="details-three">
+             <h3 class="details-three__pressure">Pressure</h3><h4 id="pressure"> --</h4>
+             <h3 class="details-three__feel">Feels like</h3><h4 id="feels"> --</h4>
+             <h3 class="details-three__sea">Sea Level</h3><h4 id="sea"> --</h4>
+             <h3 class="details-three__ground">Ground Level</h3><h4 id="ground"> --</h4>
+     </div>
+
+
+
+</div>
+                                                  <!--FOOTER CONTENT AREA-->
+
+
+
+<div class="extra-content">
+
+
+
+         <div class="details-four__lattitude">
+             <h3 >Lattitude(N/m<sup>2</sup>)</h3>
+             <h4 id="lattitude"> --</h4>
+         </div>
+
+         <div class="details-four__longitude">
+             <h3 >Longitude</h3>
+             <h4 id="longitude"> --</h4>
+         </div>
+
+         <div class="details-four__gust">
+             <h3 >Gust</h3>
+             <h4 id="gust"> --</h4>
+         </div>
+
+         <div class="details-four__mintemp">
+               <h3 >Minimum Temperature</h3>
+                    <h4 id="mintemp"> --</h4>
+         </div>             
+          
+    </div>
+
+</div>
+
+
+
+
+<script>
+
+let change=document.getElementById("view")
+let btn=document.getElementById("btn")
+let detail=document.getElementById("textArea").value.trim();
+
+let temprature=document.getElementById("temp")
+let season=document.getElementById("type")
+let humi=document.getElementById("humidity")
+let air=document.getElementById("wind")
+let den=document.getElementById("pressure")
+let like=document.getElementById("feels")
+let seaLevel=document.getElementById("sea")
+let groundLevel=document.getElementById("ground")
+
+let rain1=document.getElementById("rain")
+let sunny1=document.getElementById("sunny")
+let wind1=document.getElementById("wind")
+let snow1=document.getElementById("snow")
+let cloudy1=document.getElementById("cloudy")
+let thunder1=document.getElementById("thunder")
+
+let lat=document.getElementById("lattitude")
+let long=document.getElementById("longitude")
+let gust=document.getElementById("gust")
+let min=document.getElementById("mintemp")
+
+let city=document.getElementById("box-place__location")
+let day=document.getElementById("box-place__day")
+let month=document.getElementById("box-place__month")
+let year=document.getElementById("box-place__year")
+
+
+
+const today = new Date();
+
+const dayName = today.toLocaleString("en-US", { weekday: "long" });
+
+const monthName = today.toLocaleString("en-US", { month: "short" });
+
+const yearNum = today.getFullYear();
+
+
+
+
+
+
+
+
+
+
+async function getData(){
+
+let detail=document.getElementById("textArea").value.trim();
+let chennai=`${detail}`;
+const apiKey="f5904162aeeeec2d9be69f24af7d8296";
+const url=`https://api.openweathermap.org/data/2.5/weather?q=${chennai}&appid=${apiKey}&units=metric`;
+console.log(detail)
+
+console.log("hello")
+try{
+const response=await fetch(url);
+const user=await response.json();
+
+
+console.log(user.main.humidity)
+console.log(user)
+city.textContent=user.name + " -";
+temp.textContent=user.main.temp+"`C"
+type.textContent=user.weather[0].description.toUpperCase()
+humidity.textContent=user.main.humidity
+wind.textContent=user.wind.speed
+
+gust.textContent=user.wind.gust
+lat.textContent=user.coord.lat
+long.textContent=user.coord.lon
+mintemp.textContent=user.main.temp_min
+
+pressure.textContent=user.main.pressure
+seaLevel.textContent=user.main.sea_level
+groundLevel.textContent=user.main.grnd_level
+
+feels.textContent=user.main.feels_like
+
+
+day.textContent=dayName +",";
+month.textContent=monthName +",";
+year.textContent=yearNum;
+
+
+if(user.weather[0].description=="scattered clouds" || user.weather[0].description=="broken clouds" || user.weather[0].description=="overcast clouds")
+{
+rain.style.display="none";
+wind2.style.display="none";
+sunny.style.display="none";
+snow.style.display="none";
+thunder.style.display="none";
+
+cloudy.style.display="block";
+}
+
+
+if(user.weather[0].description=="rain")
+{
+cloudy.style.display="none";
+wind2.style.display="none";
+sunny.style.display="none";
+snow.style.display="none";
+thunder.style.display="none";
+
+rain.style.display="block";
+}
+
+
+if(user.weather[0].description=="haze" || user.weather[0].description=="mist" )
+{
+cloudy.style.display="none";
+rain.style.display="none";
+sunny.style.display="none";
+snow.style.display="none";
+thunder.style.display="none";
+
+wind2.style.display="block";
+}
+
+if(user.weather[0].description=="clear sky" || user.weather[0].description=="few clouds" && user.main.temp !=0 )
+{
+cloudy.style.display="none";
+rain.style.display="none";
+wind2.style.display="none";
+snow.style.display="none";
+thunder.style.display="none";
+
+sunny.style.display="block";
+}
+
+if(user.main.temp<0 )
+{
+cloudy.style.display="none";
+rain.style.display="none";
+wind2.style.display="none";
+sunny.style.display="none";
+thunder.style.display="none";
+
+snow.style.display="block";
+
+}
+
+
+if(user.weather[0].description=="thunder strom")
+{
+cloudy.style.display="none";
+rain.style.display="none";
+wind2.style.display="none";
+snow.style.display="none";
+sunny.style.display="none";
+
+thunder.style.display="none";
+}
+
+
+
+
+}
+
+catch(err){
+console.log(err.message)
+alert("Sorry! Place Not Found")
+alert("Try Nearby Places")
+}
+
+
+
+
+}
+
+
+
+
+
+
+</script>
+</body>
+
+</html>
+
+
+
+
+
